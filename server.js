@@ -6,7 +6,7 @@ const StoryRoute = require('./routes/story.route')
 const StripeRoute = require('./routes/stripe.route')
 const SubscriptionRoute = require('./routes/subscription.route')
 const schedule = require('node-schedule');
-const Subscription = require('./config/migration')
+const {Subscription} = require('./config/migration')
 
 
 const app = express();
