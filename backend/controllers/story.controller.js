@@ -11,17 +11,20 @@ exports.generateStory = async (req,res)=>{
 
     const {character, theme, subscription, description } = req.body
 
-    console.log(req.body);
+    console.log(character);
     const title = `generate a title of kids story the story description is ${description}`
-    const prompt = `in ${theme} theme i want to generate a kids story  approximatly 500 words the story description is ${description} `
+    const prompt = `generate a kids story
+    the theme of story theme is ${theme}  the story description ${description}
+    `
     console.log(prompt);
 
     try {
         const tit = await openai.createCompletion({
-          model: "text-davinci-003",
+          model: "text-davinci-002",
           prompt: title,
           max_tokens:2000,
-          top_p:1,
+          n:1,
+          stop:'None',
           temperature:0.5
         });
 
@@ -40,7 +43,6 @@ exports.generateStory = async (req,res)=>{
             story: story.data
           })
     } catch (error) {
-        console.log(error.data);
         res.send(error)
     }
 
