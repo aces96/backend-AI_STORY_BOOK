@@ -39,18 +39,21 @@ exports.signIn = async (req,res)=>{
         const {email, password} = req.body
 
         const user = await User.findOne({where: {email: email}})
+
+        console.log(`${user.id}`);
     
-        if(!user || !user.password == password){
-            res.status(401).json({
+        if(user.password !== password){
+            res.status(400).json({
                 message: 'email or password not correct'
             })
-        }else {
+        }else if(user.password == password){
             const token = jwt.sign({id: user.id}, process.env.SECRET_KEY, {
                 expiresIn: process.env.EXPIRE_IN
             })
 
             res.status(201).json({
                 message: 'success',
+                user_id: user.id,
                 token: token
             })
             
@@ -58,6 +61,7 @@ exports.signIn = async (req,res)=>{
 
 
     } catch (error) {
+        console.log('heeeere',error.message);
         res.status(401).send(error)
         
     }

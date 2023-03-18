@@ -5,7 +5,7 @@ exports.setPayments = async (req,res)=>{
     const {userId, type, price} = req.body
 
     try {
-        const subscription = await User.create({ name: type, price: price, UserId: userId });
+        const subscription = await Subscription.create({ name: type, price: price, UserId: userId });
         res.json({
             response: subscription
         })
