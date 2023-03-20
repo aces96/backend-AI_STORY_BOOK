@@ -36,14 +36,15 @@ exports.generateStory = async (req,res)=>{
           });
 
           console.log(tit.status);
-          console.log(story.status);
-
+          
           if (tit.status >= 200 && tit.status < 300 && story.status >= 200 && story.status < 300) {
+            console.log(story.data);
             console.log('here');
             const data = {
               title: tit.data.choices,
               story: story.data.choices
             }
+
 
             res.status(200).json(data);
           } else {
