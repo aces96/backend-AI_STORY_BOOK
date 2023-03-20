@@ -1,5 +1,7 @@
 const { Sequelize } = require("sequelize")
 const dotenv = require('dotenv').config();
+const certificatePath = path.join(__dirname, '/ca-certificate.crt')
+const serverCa = [fs.readFileSync(certificatePath, 'utf8')]
 var mysql = require('mysql2');
 
 
