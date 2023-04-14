@@ -1,6 +1,7 @@
 const { Configuration, OpenAIApi } = require("openai");
 const AWS = require('aws-sdk');
 const {getImages} = require('../helpers/S3')
+const dotenv = require('dotenv').config();
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -8,8 +9,8 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 const s3 = new AWS.S3({
   endpoint: 'https://fra1.digitaloceanspaces.com',
-  accessKeyId: 'DO00NQHLGZFJR8JRVMLD',
-  secretAccessKey: 'aunevRxwLTUKWXCHRJCqsQfKypmf/pGB1gw2gZOmlOc'
+  accessKeyId: process.env.DIGITAL_OCEAN_SPACES_PUB_KEY,
+  secretAccessKey: process.env.DIGITAL_OCEAN_SPACES_SEC_KEY
 });
 
 
